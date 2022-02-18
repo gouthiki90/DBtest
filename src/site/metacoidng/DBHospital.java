@@ -20,22 +20,11 @@ public class DBHospital {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             List<ItemModeling> hospitalList = DownloadHospital.getResponseList();
-
-            // rs.getString(dtoItem.get(i).getAddr()),
-            // rs.getString(dtoItem.get(i).getMgtStaDd()),
-            // rs.getString(dtoItem.get(i).getSidoCdNm()),
-            // rs.getString(dtoItem.get(i).getSgguCdNm()),
-            // rs.getString(dtoItem.get(i).getYadmNm()),
-            // rs.getString(dtoItem.get(i).getPcrPsblYn()),
-            // rs.getString(dtoItem.get(i).getRatPsblYn()),
-            // rs.getString(dtoItem.get(i).getRecuClCd()),
-            // rs.getString(dtoItem.get(i).getXPosWgs84()),
-            // rs.getString(dtoItem.get(i).getYPosWgs84()),
-            // rs.getString(dtoItem.get(i).getYkihoEnc()))
+            // 자바 오브젝트 파싱 메서드 리스트에 넣기
 
             System.out.println("받은 사이즈" + hospitalList.size());
             for (int i = 0; i < hospitalList.size(); i++) {
-                // 쿼리로 담기
+                // 리스트에 있는 데이터 쿼리에 넣기
                 pstmt.setString(1, hospitalList.get(i).get주소());
                 pstmt.setString(2, hospitalList.get(i).get운영시작일자());
                 pstmt.setString(3, hospitalList.get(i).get시도명());

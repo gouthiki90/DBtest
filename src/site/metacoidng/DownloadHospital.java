@@ -40,13 +40,40 @@ public class DownloadHospital {
             System.out.println(responseJson);
 
             List<Item> result = dto.getResponse().getBody().getItems().getItem();
+
+            int totcalCount = dto.getResponse().getBody().getTotalCount();
+
+            sb = new StringBuffer();
+            sb.append("http://apis.data.go.kr/B551182/rprtHospService/getRprtHospService?");
+            sb.append(
+                    "serviceKey=wJmmW29e3AEUjwLioQR22CpmqS645ep4S8TSlqtSbEsxvnkZFoNe7YG1weEWQHYZ229eNLidnI2Yt5EZ3Stv7g%3D%3D&");
+            sb.append("pageNo=1&");
+            sb.append("numOfRows=" + totcalCount + "&");
+            sb.append("_type=json");
+
+            url = new URL(sb.toString());
+
+            // 스트림 연결
+            stream = (HttpURLConnection) url.openConnection();
+            // 버퍼 연결
+            br = new BufferedReader(new InputStreamReader(stream.getInputStream(), "utf-8"));
+
+            // JSON 읽기
+            responseJson = br.readLine();
+            // 자바로 파싱
+            gson = new Gson();
+            dto = gson.fromJson(responseJson, ResponseDto.class);
+            System.out.println(responseJson);
+
+            result = dto.getResponse().getBody().getItems().getItem();
             for (int i = 0; i < result.size(); i++) {
+                // result 사이즈만큼 items 객체에 넣기
                 ItemModeling items = new ItemModeling(result.get(i).getAddr(), result.get(i).getMgtStaDd(),
                         result.get(i).getSidoCdNm(), result.get(i).getSgguCdNm(), result.get(i).getYadmNm(),
                         result.get(i).getPcrPsblYn(), result.get(i).getRatPsblYn(), result.get(i).getRecuClCd(),
                         result.get(i).getXPosWgs84(), result.get(i).getYPosWgs84(), result.get(i).getYkihoEnc());
 
-                hospitalList.add(items);
+                hospitalList.add(items); // items를 hospitalList에 넣기
             }
 
             return hospitalList;
