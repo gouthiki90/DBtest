@@ -44,7 +44,7 @@ public class ResponseDto {
                     private String mgtStaDd; // 운영시작일자
                     private String pcrPsblYn; // 구분코드
                     private String ratPsblYn; // RAT 가능 여부
-                    private int recuClCd; // 요양종별코드
+                    private String recuClCd; // 요양종별코드
                     private String sgguCdNm; // 시군구명
                     private String sidoCdNm; // 시도명
                     private String XPosWgs84; // 좌표
