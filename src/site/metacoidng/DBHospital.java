@@ -15,12 +15,11 @@ public class DBHospital {
             Connection conn = DriverManager.getConnection // ByteStream 소켓 연결
             ("jdbc:oracle:thin:@13.124.112.253:1521:xe", "SCOTT3", "TIGER3");
 
-            String sql = "INSERT INTO hospitalTbl(ID, 주소, 운영시작일자, 시도명, 시군구명, 요양기관명, 구분코드, RAT가능여부, 요양종별코드, X좌표, Y좌표, 암호화된요양기호) VALUES(SEQ_HOSPITALTBL.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO hospitalTbl(ID, 주소, 운영시작일자, 시도명, 시군구명, 요양기관명, 구분코드, RAT가능여부, 요양종별코드, X좌표, Y좌표, 암호화된요양기호) VALUES(SEQ_HOSPITALTBL.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            List<ItemModeling> item = new ArrayList<>();
-            List<Item> dtoItem = new ArrayList<>();
+            List<ItemModeling> hospitalList = DownloadHospital.getResponseList();
 
             // rs.getString(dtoItem.get(i).getAddr()),
             // rs.getString(dtoItem.get(i).getMgtStaDd()),
@@ -34,34 +33,25 @@ public class DBHospital {
             // rs.getString(dtoItem.get(i).getYPosWgs84()),
             // rs.getString(dtoItem.get(i).getYkihoEnc()))
 
-            for (int i = 0; i < item.size(); i++) {
-                // 리스트에 담기
-                ItemModeling items = new ItemModeling(dtoItem.get(i).getAddr(), dtoItem.get(i).getMgtStaDd(),
-                        dtoItem.get(i).getSidoCdNm(), dtoItem.get(i).getSgguCdNm(), dtoItem.get(i).getYadmNm(),
-                        dtoItem.get(i).getPcrPsblYn(), dtoItem.get(i).getRatPsblYn(), dtoItem.get(i).getRecuClCd(),
-                        dtoItem.get(i).getXPosWgs84(), dtoItem.get(i).getYPosWgs84(), dtoItem.get(i).getYkihoEnc());
+            System.out.println("받은 사이즈" + hospitalList.size());
+            for (int i = 0; i < hospitalList.size(); i++) {
+                // 쿼리로 담기
+                pstmt.setString(1, hospitalList.get(i).get주소());
+                pstmt.setString(2, hospitalList.get(i).get운영시작일자());
+                pstmt.setString(3, hospitalList.get(i).get시도명());
+                pstmt.setString(4, hospitalList.get(i).get시군구명());
+                pstmt.setString(5, hospitalList.get(i).get요양기관명());
+                pstmt.setString(6, hospitalList.get(i).get구분코드());
+                pstmt.setString(7, hospitalList.get(i).getRAT가능여부());
+                pstmt.setString(8, hospitalList.get(i).get요양종별코드());
+                pstmt.setString(9, hospitalList.get(i).getX좌표());
+                pstmt.setString(10, hospitalList.get(i).getY좌표());
+                pstmt.setString(11, hospitalList.get(i).get암호화된요양기호());
 
-                pstmt.setString(1, items.get주소());
-                pstmt.setString(2, items.get운영시작일자());
-                pstmt.setString(3, items.get시도명());
-                pstmt.setString(4, items.get시군구명());
-                pstmt.setString(5, items.get요양기관명());
-                pstmt.setString(6, items.get구분코드());
-                pstmt.setString(7, items.getRAT가능여부());
-                pstmt.setString(8, items.get요양종별코드());
-                pstmt.setString(9, items.getX좌표());
-                pstmt.setString(10, items.getY좌표());
-                pstmt.setString(11, items.get암호화된요양기호());
+                int result = pstmt.executeUpdate(); // sql 가동과 동시에 커밋
 
             }
 
-            int result = pstmt.executeUpdate();
-
-            if (result > 0) {
-                System.out.println("성공");
-            } else {
-                System.out.println("실패");
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
