@@ -18,7 +18,7 @@ public class DownloadHospital {
         try {
 
             StringBuffer sb = new StringBuffer();
-            sb.append("http://apis.data.go.kr/B551182/rprtHospService/getRprtHospService?");
+            sb.append("http://apis.data.go.kr/B551182/rprtHospService/getRprtHospService?"); // endpoint
             sb.append(
                     "serviceKey=wJmmW29e3AEUjwLioQR22CpmqS645ep4S8TSlqtSbEsxvnkZFoNe7YG1weEWQHYZ229eNLidnI2Yt5EZ3Stv7g%3D%3D&");
             sb.append("pageNo=1&");
@@ -41,6 +41,7 @@ public class DownloadHospital {
 
             List<Item> result = dto.getResponse().getBody().getItems().getItem();
 
+            //
             int totcalCount = dto.getResponse().getBody().getTotalCount();
 
             sb = new StringBuffer();

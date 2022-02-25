@@ -7,6 +7,10 @@
         "/Users/jeonga-eun/Desktop/green_workspacce/java_lab/java-green-2022/lib/javaSDK-2.2.jar",
         "/Users/jeonga-eun/Desktop/green_workspacce/java_lab/java-green-2022/lib/json-simple-1.1.1.jar",
         "/Users/jeonga-eun/Desktop/green_workspacce/java_lab/java-green-2022/lib/lombok.jar",
-        "/Users/jeonga-eun/Desktop/green_workspacce/db_lab/db_projects/lib/ojdbc8-21.1.0.0.jar"
+        "/Users/jeonga-eun/Desktop/green_workspacce/db_lab/db_projects/lib/ojdbc8-21.1.0.0.jar",
+        "/Users/jeonga-eun/Desktop/green_workspacce/db_lab/db_projects/lib/gson-2.8.5.jar",
+        "/Users/jeonga-eun/Desktop/green_workspacce/db_lab/db_projects/lib/javaSDK-2.2.jar",
+        "/Users/jeonga-eun/Desktop/green_workspacce/db_lab/db_projects/lib/json-simple-1.1.1.jar",
+        "/Users/jeonga-eun/Desktop/green_workspacce/db_lab/db_projects/lib/lombok.jar"
     ]
 }
